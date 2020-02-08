@@ -14,7 +14,7 @@ Although I did not have time to thoroughly test my program, I am confident that 
 ## Optimization Opportunities
 Currently, my program runs in linear time because it has to iterate through all the rules to find a match. If I had more time to think about complexity of this program, I would try to utilize a different data structure that ensure better performance and reduce the time complexity. 
 
-Team Preferences
+## Team Preferences
 1. Data Team
 2. Platform Team
 3. Policy Team
