@@ -6,10 +6,10 @@ class Firewall:
     def __init__(self, path):
         with open(path, 'r') as f:
             reader = csv.reader(f)
-            self.rules = list(reader)
+            self.rules = list(reader) 
 
-    #input: port number or range
-    #output: list of row indices where the condition is true
+    #input: port number 
+    #output: list of rules that satisfy the port condition
     def process_port(self, given_port):
         indices = []
         for i in range(0,len(self.rules)):
@@ -24,6 +24,8 @@ class Firewall:
                     indices.append(i)
         return indices
     
+    #input: direction value(string), list of rules
+    #output: index where direction matches, or -1 if it doesn't find a match
     def process_dir(self, given_dir, ip_list):
         #print(self.rules[index][0])
         #print(given_dir)
@@ -33,11 +35,15 @@ class Firewall:
                 return i
         return -1
 
+    #input: protocol value(string), index
+    #output: index if matches, -1 if it doesn't match
     def process_protocol(self, given_protocol, index):
         if(self.rules[index][1] == given_protocol):
             return index
         return -1
 
+    #input: ip value (single address or a range), list of rules
+    #output: list of rules that match the IP 
     def process_IP(self, given_ip, port_list):
         given_ip_val = given_ip.replace('.','')
         ip_list = []
@@ -58,6 +64,8 @@ class Firewall:
             
         return ip_list
               
+    #input: a packet 
+    #output: true or false
     def accept_packet(self, direction, protocol, port, ip):
         '''
         1. find index of port
